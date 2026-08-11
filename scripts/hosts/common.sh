@@ -12,7 +12,7 @@
 #  Cach dung trong file rieng cua tung may:
 #     source "$(dirname "$0")/common.sh"
 #     FQDN="int-srv01.int.pvnskills.org"
-#     declare -a INTERFACES=( "eth0|10.1.10.10/24||2001:db8:1001:10::10/64|" )
+#     declare -a INTERFACES=( "ens33|10.1.10.10/24||2001:db8:1001:10::10/64|" )
 #     setup_hostname
 #     setup_network
 #     setup_base
@@ -60,14 +60,14 @@ setup_hostname() {
 #
 #   Vi du may 1 interface (int-srv01):
 #     declare -a INTERFACES=(
-#         "eth0|10.1.10.10/24||2001:db8:1001:10::10/64|"
+#         "ens33|10.1.10.10/24||2001:db8:1001:10::10/64|"
 #     )
 #
 #   Vi du may nhieu interface (fw):
 #     declare -a INTERFACES=(
-#         "eth0|1.1.1.10/24|1.1.1.1|2001:db8:1111::10/64|2001:db8:1111::1"
-#         "eth1|10.1.10.1/24||2001:db8:1001:10::1/64|"
-#         "eth2|10.1.20.1/24||2001:db8:1001:20::1/64|"
+#         "ens33|1.1.1.10/24|1.1.1.1|2001:db8:1111::10/64|2001:db8:1111::1"
+#         "ens37|10.1.10.1/24||2001:db8:1001:10::1/64|"
+#         "ens38|10.1.20.1/24||2001:db8:1001:20::1/64|"
 #     )
 # ==============================================================================
 

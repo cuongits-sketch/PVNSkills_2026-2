@@ -1,0 +1,28 @@
+# ==============================================================================
+#  site.yml
+#  Playbook cau hinh CA HAI may chu web (web01 + web02) - dung cho van hanh
+#  hang ngay. Dat tai /opt/ansible/site.yml tren ha-prx01.
+#
+#  Khac voi configure-web02.yml: file nay chay tren nhom "webservers"
+#  (ca web01 lan web02), con configure-web02.yml CHI chay rieng web02
+#  (dung file dung theo yeu cau cham diem cua de thi).
+#
+#  Ca 2 playbook dung CHUNG logic tu tasks/webserver.yml - sua 1 noi,
+#  ap dung cho ca 2 playbook.
+#
+#  Cach chay:
+#     ansible-playbook /opt/ansible/site.yml
+# ==============================================================================
+---
+- name: Configure web01 and web02 to serve www.dmz.pvnskills.org over HTTP
+  hosts: webservers
+  become: true
+
+  tasks:
+    - import_tasks: tasks/webserver.yml
+
+  handlers:
+    - name: Reload nginx
+      service:
+        name: nginx
+        state: reloaded

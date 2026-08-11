@@ -114,7 +114,7 @@ setup_base() {
     sed -i 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
     locale-gen
     update-locale LANG=en_US.UTF-8
-    localectl set-x11-keymap us
+    localectl set-keymap us
 
     log "Cai dat bo cong cu kiem tra bat buoc (theo yeu cau de thi)"
     apt update

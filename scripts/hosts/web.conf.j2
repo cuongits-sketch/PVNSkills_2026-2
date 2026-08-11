@@ -1,0 +1,25 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name www.dmz.pvnskills.org;
+    root /opt/wwwroot;
+    index main.html;
+
+    # Yeu cau de thi: /whoami phai tra ve hostname cua chinh may nay
+    location = /whoami {
+        default_type text/plain;
+        return 200 "{{ ansible_hostname }}\n";
+    }
+
+    # Yeu cau de thi: neu khong co file duoc chi dinh, dung main.html
+    # (khong duoc doi ten file main.html)
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    # Yeu cau de thi: neu khong tim thay trang, tra ve 404.html trong /opt/wwwroot/
+    error_page 404 /404.html;
+    location = /404.html {
+        internal;
+    }
+}

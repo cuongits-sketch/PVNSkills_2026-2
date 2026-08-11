@@ -1,0 +1,51 @@
+# ==============================================================================
+#  tasks/webserver.yml
+#  Danh sach TASK DUNG CHUNG de cau hinh may chu web (Nginx + /opt/wwwroot).
+#  Duoc "import" boi CA HAI playbook:
+#    - site.yml              (cau hinh ca web01 va web02 - dung hang ngay)
+#    - configure-web02.yml   (CHI web02 - dung file nay DE CHAM DIEM, khong
+#                              duoc sua doi theo yeu cau de thi)
+#
+#  Tach rieng task ra file nay giup KHONG LAP LAI logic giua 2 playbook -
+#  chi co DUY NHAT MOT noi dinh nghia "may chu web can duoc cau hinh nhu the nao".
+# ==============================================================================
+---
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+    update_cache: true
+
+- name: Ensure /opt/wwwroot exists with correct ownership
+  file:
+    path: /opt/wwwroot
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: "0755"
+
+- name: Deploy Nginx site configuration from template
+  template:
+    src: templates/web.conf.j2
+    dest: /etc/nginx/sites-available/web.conf
+    mode: "0644"
+  notify: Reload nginx
+
+- name: Enable web site config
+  file:
+    src: /etc/nginx/sites-available/web.conf
+    dest: /etc/nginx/sites-enabled/web.conf
+    state: link
+  notify: Reload nginx
+
+- name: Disable default Nginx site
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify: Reload nginx
+
+- name: Ensure Nginx is running and enabled at boot
+  service:
+    name: nginx
+    state: started
+    enabled: true

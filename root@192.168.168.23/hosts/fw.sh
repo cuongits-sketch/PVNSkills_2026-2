@@ -30,13 +30,13 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-if [[ ! -f "${SCRIPT_DIR}/../lib/common.sh" ]]; then
+if [[ ! -f "${SCRIPT_DIR}/common.sh" ]]; then
     echo "Khong tim thay common.sh cung thu muc voi fw.sh." >&2
     exit 1
 fi
 
 # shellcheck source=common.sh
-source "${SCRIPT_DIR}/../lib/common.sh"
+source "${SCRIPT_DIR}/common.sh"
 
 
 # ==============================================================================
@@ -51,15 +51,15 @@ FQDN="fw.pvnskills.org"
 # Dinh dang moi phan tu: "iface|ip4/cidr|gateway4|ip6/cidr|gateway6"
 # Chi WAN co gateway (default route) - INT/DMZ de trong de tranh xung dot route.
 declare -a INTERFACES=(
-    "ens33|1.1.1.10/24|1.1.1.1|2001:db8:1111::10/64|2001:db8:1111::1"   # WAN
-    "ens37|10.1.10.1/24||2001:db8:1001:10::1/64|"                        # INT
-    "ens38|10.1.20.1/24||2001:db8:1001:20::1/64|"                        # DMZ
+    "eth0|1.1.1.10/24|1.1.1.1|2001:db8:1111::10/64|2001:db8:1111::1"   # WAN
+    "eth1|10.1.10.1/24||2001:db8:1001:10::1/64|"                        # INT
+    "eth2|10.1.20.1/24||2001:db8:1001:20::1/64|"                        # DMZ
 )
 
 # Ten interface dung lai trong fw-setup.sh (nftables/wireguard)
-IF_WAN="ens33"
-IF_INT="ens37"
-IF_DMZ="ens38"
+IF_WAN="eth0"
+IF_INT="eth1"
+IF_DMZ="eth2"
 IF_VPN="wg0"
 
 # --- Virtual IP (VIP) cua HA Reverse Proxy trong DMZ - dung lai o fw-setup.sh ---

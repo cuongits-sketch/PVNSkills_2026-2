@@ -1,0 +1,28 @@
+# ==============================================================================
+#  configure-web02.yml
+#  Playbook CHINH THUC dung de CHAM DIEM (yeu cau de thi):
+#  Ban giam khao se khoi phuc trang thai ban dau cua web02, roi chay TU
+#  ha-prx01 dung lenh:
+#       ansible-playbook /opt/ansible/configure-web02.yml
+#  Lenh nay PHAI hoat dong chinh xac NGAY LAN DAU - khong duoc phep sua doi.
+#
+#  File nay CHI IMPORT lai chinh cac task dung chung trong tasks/webserver.yml
+#  (giong het site.yml, chi khac o "hosts: web02" thay vi "hosts: webservers")
+#  - dam bao khong co su khac biet logic nao giua cau hinh "dung hang ngay"
+#  va cau hinh "dung de cham diem".
+#
+#  Dat tai: /opt/ansible/configure-web02.yml tren ha-prx01
+# ==============================================================================
+---
+- name: Configure web02 to serve www.dmz.pvnskills.org over HTTP
+  hosts: web02
+  become: true
+
+  tasks:
+    - import_tasks: tasks/webserver.yml
+
+  handlers:
+    - name: Reload nginx
+      service:
+        name: nginx
+        state: reloaded
