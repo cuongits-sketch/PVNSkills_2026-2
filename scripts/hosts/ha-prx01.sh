@@ -51,7 +51,7 @@ FQDN="ha-prx01.dmz.pvnskills.org"
 
 # --- Interface (1 interface DMZ) ---
 declare -a INTERFACES=(
-    "ens33|10.1.20.21/24||2001:db8:1001:20::21/64|"
+    "ens192|10.1.20.21/24||2001:db8:1001:20::21/64|"
 )
 
 # Dia chi cua chinh may nay
@@ -81,7 +81,7 @@ VRRP_STATE="MASTER"
 VRRP_PRIORITY="150"
 VRRP_ROUTER_ID="51"
 VRRP_AUTH_PASS="pvnsc2026"
-VRRP_IFACE="eth0"
+VRRP_IFACE="ens192"
 
 # --- DNS DMZ (BIND9) - ha-prx01 la Primary ---
 DNS_ZONE_DIR="/etc/bind/zones"
