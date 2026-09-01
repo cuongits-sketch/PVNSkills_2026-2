@@ -1,9 +1,9 @@
 from enum import StrEnum
 from nornir.core.task import Task
-from tasks.common.command_controller import run_command
+from scripts.test.tasks.common.command_controller import run_command
 
-from tasks.common.helper import UNKNOWN_MSG, process_result_exit_code
-from tasks.common.sub_aspect_model import SubAspectResult
+from scripts.test.tasks.common.helper import UNKNOWN_MSG, process_result_exit_code
+from scripts.test.tasks.common.sub_aspect_model import SubAspectResult
 
 
 class DNS_RECORD_TYPE(StrEnum):

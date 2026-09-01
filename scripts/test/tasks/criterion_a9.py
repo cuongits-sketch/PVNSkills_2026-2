@@ -1,7 +1,7 @@
 from nornir.core.task import Task, Result
-from tasks.common.command_controller import run_command
+from scripts.test.tasks.common.command_controller import run_command
 
-from tasks.common.helper import UNKNOWN_MSG, process_result_exit_code
+from scripts.test.tasks.common.helper import UNKNOWN_MSG, process_result_exit_code
 
 
 def task_A09_01(task: Task) -> Result:

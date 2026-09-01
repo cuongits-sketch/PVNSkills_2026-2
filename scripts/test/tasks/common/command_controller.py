@@ -5,7 +5,7 @@ from colorama import Fore, Style
 
 from nornir.core.task import Result, Task
 
-from tasks.common.local_command import local_command
+from scripts.test.tasks.common.local_command import local_command
 
 
 def run_command(task: Task, command: str) -> Result:

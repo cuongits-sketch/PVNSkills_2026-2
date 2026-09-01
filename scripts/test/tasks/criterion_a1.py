@@ -1,17 +1,17 @@
 from nornir.core.task import Task, Result
 
-from tasks.common.command_controller import run_command
-from tasks.common.ldap_checks import (
+from scripts.test.tasks.common.command_controller import run_command
+from scripts.test.tasks.common.ldap_checks import (
     check_ldap_login,
     check_ldap_user_attributes,
     check_ldap_user_exists,
 )
-from tasks.common.helper import UNKNOWN_MSG
+from scripts.test.tasks.common.helper import UNKNOWN_MSG
 
 
 BASE_DN = "dc=int,dc=pvnskills,dc=org"
 ADMIN_DN = "cn=admin,dc=int,dc=pvnskills,dc=org"
-ADMIN_PW = "Skill06@pvnsc"
+ADMIN_PW = "123456"
 
 
 def task_A01_01(task: Task) -> Result:

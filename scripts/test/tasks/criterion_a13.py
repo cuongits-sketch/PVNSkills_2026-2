@@ -1,8 +1,8 @@
 from nornir.core.task import Task, Result
-from tasks.common.command_controller import run_command
+from scripts.test.tasks.common.command_controller import run_command
 
-from tasks.common.helper import UNKNOWN_MSG
-from tasks.common.dns_checks import (
+from scripts.test.tasks.common.helper import UNKNOWN_MSG
+from scripts.test.tasks.common.dns_checks import (
     DNS_RECORD_TYPE,
     check_dns_record,
     check_host_record,

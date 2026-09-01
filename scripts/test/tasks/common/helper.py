@@ -1,5 +1,5 @@
 from nornir.core.task import Task, Result
-from tasks.common.command_controller import run_command
+from scripts.test.tasks.common.command_controller import run_command
 
 # Constants
 UNKNOWN_MSG = "unknown"

@@ -4,28 +4,14 @@ import signal
 import sys
 import os
 
-from runner.tag_runner import ThreadedTagRunner
-from processors.score_report import PrintScoreReport
+from scripts.test.runner.tag_runner import ThreadedTagRunner
+from scripts.test.processors.score_report import PrintScoreReport
 from nornir import InitNornir
 from nornir.core.filter import F
 
-from tasks import (
-    criterion_a1,
-    criterion_a2,
-    criterion_a3,
-    criterion_a4,
-    criterion_a5,
-    criterion_a6,
-    criterion_a7,
-    criterion_a8,
-    criterion_a9,
-    criterion_a10,
-    criterion_a11,
-    criterion_a12,
-    criterion_a13,
-    criterion_a14,
-    criterion_a15,
-    criterion_a16
+from scripts.test.tasks import criterion_a1, criterion_a10, criterion_a11, criterion_a12, criterion_a13, criterion_a14, criterion_a15, criterion_a16, criterion_a2, criterion_a3, criterion_a4, criterion_a5, criterion_a6, criterion_a7, criterion_a8
+from scripts.test.tasks import (
+    criterion_a9
 )
 
 # Set working dir
