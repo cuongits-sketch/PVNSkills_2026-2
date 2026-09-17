@@ -26,13 +26,13 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-if [[ ! -f "${SCRIPT_DIR}/fw.sh" ]]; then
+if [[ ! -f "${SCRIPT_DIR}/hosts/fw.sh" ]]; then
     echo "Khong tim thay fw.sh cung thu muc voi fw-setup.sh. Dat 2 file chung 1 thu muc." >&2
     exit 1
 fi
 
 # shellcheck source=fw.sh
-source "${SCRIPT_DIR}/fw.sh"
+source "${SCRIPT_DIR}/hosts/fw.sh"
 # Luu y: cau lenh source o tren KHONG lam chay main() cua fw.sh,
 # vi fw.sh chi tu goi main() khi duoc thuc thi truc tiep (xem SECTION 8 cua fw.sh)
 
@@ -240,6 +240,11 @@ setup_transparent_proxy() {
     cat > /etc/squid/squid.conf << EOF
 # ==== fw-setup.sh: Transparent Proxy config ====
 
+# Forward-proxy port (non-intercept) on loopback so Squid can build
+# internal URLs and serve management resources. Not exposed externally.
+http_port 127.0.0.1:3128
+
+# Intercept port used by NAT redirection from INT/VPN
 http_port ${SQUID_INTERCEPT_PORT} intercept
 
 acl int_net src 10.1.10.0/24
@@ -253,13 +258,50 @@ reply_header_add x-secured-by "clearsky-proxy"
 
 cache_dir ufs /var/spool/squid 100 16 256
 coredump_dir /var/spool/squid
+visible_hostname ${FQDN}
 EOF
 
     log "Khoi tao thu muc cache Squid"
-    squid -z || true
 
-    systemctl enable squid
-    systemctl restart squid
+    # Ensure spool and log directories exist with correct ownership.
+    mkdir -p /var/spool/squid /var/log/squid
+
+    # Determine squid runtime user (common: proxy or squid)
+    if getent passwd proxy >/dev/null 2>&1; then
+        SQUID_USER=proxy
+    elif getent passwd squid >/dev/null 2>&1; then
+        SQUID_USER=squid
+    else
+        SQUID_USER=proxy
+    fi
+
+    chown -R ${SQUID_USER}:${SQUID_USER} /var/spool/squid /var/log/squid || true
+
+    # Initialize cache directories (will create subdirs under /var/spool/squid)
+    if ! squid -z; then
+        log "ERROR: squid -z failed during cache init"
+        # Show recent cache log and systemd journal to help debugging
+        tail -n 50 /var/log/squid/cache.log || true
+        journalctl -u squid --no-pager -n 200 || journalctl -u squid.service --no-pager -n 200 || true
+        exit 1
+    fi
+
+    # Ensure runtime directory for PID exists (tmpfs may be cleared on boot)
+    mkdir -p /run/squid
+    chown ${SQUID_USER}:${SQUID_USER} /run/squid || true
+
+    # Enable and start service; try alternate unit names if needed and log on failure
+    if ! systemctl enable squid >/dev/null 2>&1; then
+        log "systemctl enable squid refused or failed, trying squid.service or squid3.service"
+        systemctl enable squid.service || systemctl enable squid3.service || true
+    fi
+
+    if ! systemctl restart squid >/dev/null 2>&1; then
+        log "ERROR: squid.service failed to start — showing diagnostics"
+        journalctl -u squid --no-pager -n 200 || journalctl -u squid.service --no-pager -n 200 || true
+        tail -n 200 /var/log/squid/cache.log || true
+        exit 1
+    fi
 }
 
 

@@ -409,8 +409,18 @@ EOF
     named-checkzone "${LDAP_DOMAIN}" "${DNS_ZONE_DIR}/db.int.pvnskills.org"
     named-checkzone "10.1.10.in-addr.arpa" "${DNS_ZONE_DIR}/db.10.1.10"
 
-    systemctl restart bind9
-    systemctl enable bind9
+    # Restart and enable BIND. Some distributions provide an alias unit
+    # (e.g. bind9.service -> named.service). Avoid failing under set -e
+    # by trying the canonical unit when the alias operation is refused.
+    if ! systemctl restart bind9 >/dev/null 2>&1; then
+        log "systemctl restart bind9 failed, trying named.service"
+        systemctl restart named || true
+    fi
+
+    if ! systemctl enable bind9 >/dev/null 2>&1; then
+        log "systemctl enable bind9 refused (alias); enabling named.service instead"
+        systemctl enable named || true
+    fi
 
     log "Tro resolver cua chinh may nay ve DNS local"
     cat > /etc/resolv.conf << EOF

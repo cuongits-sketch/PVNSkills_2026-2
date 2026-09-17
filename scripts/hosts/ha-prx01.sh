@@ -32,13 +32,13 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-if [[ ! -f "${SCRIPT_DIR}/common.sh" ]]; then
+if [[ ! -f "${SCRIPT_DIR}/../lib/common.sh" ]]; then
     echo "Khong tim thay common.sh cung thu muc voi ha-prx01.sh." >&2
     exit 1
 fi
 
 # shellcheck source=common.sh
-source "${SCRIPT_DIR}/common.sh"
+source "${SCRIPT_DIR}/../lib/common.sh"
 
 
 # ==============================================================================
@@ -81,7 +81,7 @@ VRRP_STATE="MASTER"
 VRRP_PRIORITY="150"
 VRRP_ROUTER_ID="51"
 VRRP_AUTH_PASS="pvnsc2026"
-VRRP_IFACE="ens192"
+VRRP_IFACE="ens33"
 
 # --- DNS DMZ (BIND9) - ha-prx01 la Primary ---
 DNS_ZONE_DIR="/etc/bind/zones"

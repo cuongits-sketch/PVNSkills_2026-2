@@ -38,7 +38,7 @@ if [[ ! -f "${SCRIPT_DIR}/../lib/common.sh" ]]; then
 fi
 
 # shellcheck source=common.sh
-source "${SCRIPT_DIR}/common.sh"
+source "${SCRIPT_DIR}/../lib/common.sh"
 
 
 # ==============================================================================
@@ -81,7 +81,7 @@ VRRP_STATE="BACKUP"
 VRRP_PRIORITY="100"
 VRRP_ROUTER_ID="51"            # PHAI GIONG ha-prx01 de cung 1 nhom VRRP
 VRRP_AUTH_PASS="pvnsc2026"     # PHAI GIONG ha-prx01
-VRRP_IFACE="eth0"
+VRRP_IFACE="ens33"
 
 # --- DNS DMZ (BIND9) - ha-prx02 la Secondary, dong bo tu ha-prx01 ---
 DNS_ZONE_DIR="/etc/bind/zones"

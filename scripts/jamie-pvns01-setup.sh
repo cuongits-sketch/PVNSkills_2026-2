@@ -30,13 +30,13 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-if [[ ! -f "${SCRIPT_DIR}/jamie-pvns01.sh" ]]; then
+if [[ ! -f "${SCRIPT_DIR}/hosts/jamie-pvns01.sh" ]]; then
     echo "Khong tim thay jamie-pvns01.sh cung thu muc voi jamie-pvns01-setup.sh." >&2
     exit 1
 fi
 
 # shellcheck source=jamie-pvns01.sh
-source "${SCRIPT_DIR}/jamie-pvns01.sh"
+source "${SCRIPT_DIR}/hosts/jamie-pvns01.sh"
 
 SSH_OPTS="-o StrictHostKeyChecking=no -o ConnectTimeout=5 -i /root/.ssh/id_ed25519"
 
