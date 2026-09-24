@@ -81,7 +81,7 @@ VRRP_STATE="MASTER"
 VRRP_PRIORITY="150"
 VRRP_ROUTER_ID="51"
 VRRP_AUTH_PASS="pvnsc2026"
-VRRP_IFACE="ens33"
+VRRP_IFACE="ens192"
 
 # --- DNS DMZ (BIND9) - ha-prx01 la Primary ---
 DNS_ZONE_DIR="/etc/bind/zones"

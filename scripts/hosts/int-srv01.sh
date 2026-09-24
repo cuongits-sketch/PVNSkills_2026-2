@@ -49,7 +49,7 @@ FQDN="int-srv01.int.pvnskills.org"
 
 # --- Interface (chi 1 interface duy nhat, khac voi fw co 3) ---
 declare -a INTERFACES=(
-    "ens33|10.1.10.10/24||2001:db8:1001:10::10/64|"
+    "ens192|10.1.10.10/24||2001:db8:1001:10::10/64|"
 )
 
 # Dia chi cua chinh may nay - dung lai nhieu noi trong int-srv01-setup.sh

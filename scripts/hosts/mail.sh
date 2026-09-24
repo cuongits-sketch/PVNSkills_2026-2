@@ -49,7 +49,7 @@ FQDN="mail.dmz.pvnskills.org"
 
 # --- Interface (1 interface DMZ) ---
 declare -a INTERFACES=(
-    "ens33|10.1.20.10/24||2001:db8:1001:20::10/64|"
+    "ens192|10.1.20.10/24||2001:db8:1001:20::10/64|"
 )
 
 # Dia chi cua chinh may nay

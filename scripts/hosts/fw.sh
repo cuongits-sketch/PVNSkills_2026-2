@@ -51,15 +51,15 @@ FQDN="fw.pvnskills.org"
 # Dinh dang moi phan tu: "iface|ip4/cidr|gateway4|ip6/cidr|gateway6"
 # Chi WAN co gateway (default route) - INT/DMZ de trong de tranh xung dot route.
 declare -a INTERFACES=(
-    "ens33|1.1.1.10/24|1.1.1.1|2001:db8:1111::10/64|2001:db8:1111::1"   # WAN
-    "ens37|10.1.10.1/24||2001:db8:1001:10::1/64|"                        # INT
-    "ens38|10.1.20.1/24||2001:db8:1001:20::1/64|"                        # DMZ
+    "ens192|1.1.1.10/24|1.1.1.1|2001:db8:1111::10/64|2001:db8:1111::1"   # WAN
+    "ens224|10.1.10.1/24||2001:db8:1001:10::1/64|"                        # INT
+    "ens256|10.1.20.1/24||2001:db8:1001:20::1/64|"                        # DMZ
 )
 
 # Ten interface dung lai trong fw-setup.sh (nftables/wireguard)
-IF_WAN="ens33"
-IF_INT="ens37"
-IF_DMZ="ens38"
+IF_WAN="ens192"
+IF_INT="ens224"
+IF_DMZ="ens256"
 IF_VPN="wg0"
 
 # --- Virtual IP (VIP) cua HA Reverse Proxy trong DMZ - dung lai o fw-setup.sh ---
