@@ -55,7 +55,7 @@ FQDN="jamie-pvns01.ext.pvnskills.org"
 
 # --- Interface (chi WAN - wg0 do NetworkManager quan ly, khong khai bao o day) ---
 declare -a INTERFACES=(
-    "ens33|1.1.1.20/24|1.1.1.1|2001:db8:1111::20/64|2001:db8:1111::1"
+    "ens192|1.1.1.20/24|1.1.1.1|2001:db8:1111::20/64|2001:db8:1111::1"
 )
 
 IP4="1.1.1.20"

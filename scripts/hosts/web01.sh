@@ -51,7 +51,7 @@ source "${SCRIPT_DIR}/../lib/common.sh"
 FQDN="web01.dmz.pvnskills.org"
 
 declare -a INTERFACES=(
-    "eth0|10.1.20.31/24||2001:db8:1001:20::31/64|"
+    "ens192|10.1.20.31/24||2001:db8:1001:20::31/64|"
 )
 
 IP4="10.1.20.31"
