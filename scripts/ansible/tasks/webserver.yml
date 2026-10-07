@@ -24,6 +24,43 @@
     group: www-data
     mode: "0755"
 
+- name: Deploy homepage content
+  copy:
+    dest: /opt/wwwroot/main.html
+    content: |
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="utf-8">
+          <title>PVNSkills DMZ</title>
+      </head>
+      <body>
+          <h1>PVNSkills DMZ Portal</h1>
+          <p>7ecb4e033421b96f88e2111fe97cdad4ddceacc6</p>
+      </body>
+      </html>
+    owner: www-data
+    group: www-data
+    mode: "0644"
+
+- name: Deploy custom 404 page
+  copy:
+    dest: /opt/wwwroot/404.html
+    content: |
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="utf-8">
+          <title>404</title>
+      </head>
+      <body>
+          <h1>Sorry, but something went wrong</h1>
+      </body>
+      </html>
+    owner: www-data
+    group: www-data
+    mode: "0644"
+
 - name: Deploy Nginx site configuration from template
   template:
     src: templates/web.conf.j2
