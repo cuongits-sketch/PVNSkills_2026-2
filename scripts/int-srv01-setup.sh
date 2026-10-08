@@ -24,13 +24,13 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-if [[ ! -f "${SCRIPT_DIR}/hosts/int-srv01.sh" ]]; then
+if [[ ! -f "${SCRIPT_DIR}/int-srv01.sh" ]]; then
     echo "Khong tim thay int-srv01.sh cung thu muc voi int-srv01-setup.sh." >&2
     exit 1
 fi
 
 # shellcheck source=int-srv01.sh
-source "${SCRIPT_DIR}/hosts/int-srv01.sh"
+source "${SCRIPT_DIR}/int-srv01.sh"
 # Luu y: "source" o tren KHONG lam chay main() cua int-srv01.sh,
 # vi int-srv01.sh chi tu goi main() khi duoc thuc thi truc tiep
 

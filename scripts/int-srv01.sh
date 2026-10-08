@@ -30,13 +30,13 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-if [[ ! -f "${SCRIPT_DIR}/../lib/common.sh" ]]; then
+if [[ ! -f "${SCRIPT_DIR}/common.sh" ]]; then
     echo "Khong tim thay common.sh cung thu muc voi int-srv01.sh." >&2
     exit 1
 fi
 
 # shellcheck source=common.sh
-source "${SCRIPT_DIR}/../lib/common.sh"
+source "${SCRIPT_DIR}/common.sh"
 
 
 # ==============================================================================

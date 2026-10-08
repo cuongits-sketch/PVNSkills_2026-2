@@ -28,13 +28,13 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-if [[ ! -f "${SCRIPT_DIR}/hosts/ha-prx02.sh" ]]; then
+if [[ ! -f "${SCRIPT_DIR}/ha-prx02.sh" ]]; then
     echo "Khong tim thay ha-prx02.sh cung thu muc voi ha-prx02-setup.sh." >&2
     exit 1
 fi
 
 # shellcheck source=ha-prx02.sh
-source "${SCRIPT_DIR}/hosts/ha-prx02.sh"
+source "${SCRIPT_DIR}/ha-prx02.sh"
 # Luu y: "source" o tren KHONG lam chay main() cua ha-prx02.sh,
 # vi ha-prx02.sh chi tu goi main() khi duoc thuc thi truc tiep
 

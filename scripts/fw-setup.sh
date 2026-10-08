@@ -26,13 +26,13 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-if [[ ! -f "${SCRIPT_DIR}/hosts/fw.sh" ]]; then
+if [[ ! -f "${SCRIPT_DIR}/fw.sh" ]]; then
     echo "Khong tim thay fw.sh cung thu muc voi fw-setup.sh. Dat 2 file chung 1 thu muc." >&2
     exit 1
 fi
 
 # shellcheck source=fw.sh
-source "${SCRIPT_DIR}/hosts/fw.sh"
+source "${SCRIPT_DIR}/fw.sh"
 # Luu y: cau lenh source o tren KHONG lam chay main() cua fw.sh,
 # vi fw.sh chi tu goi main() khi duoc thuc thi truc tiep (xem SECTION 8 cua fw.sh)
 

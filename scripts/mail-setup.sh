@@ -27,13 +27,13 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-if [[ ! -f "${SCRIPT_DIR}/hosts/mail.sh" ]]; then
+if [[ ! -f "${SCRIPT_DIR}/mail.sh" ]]; then
     echo "Khong tim thay mail.sh cung thu muc voi mail-setup.sh." >&2
     exit 1
 fi
 
 # shellcheck source=mail.sh
-source "${SCRIPT_DIR}/hosts/mail.sh"
+source "${SCRIPT_DIR}/mail.sh"
 # Luu y: "source" o tren KHONG lam chay main() cua mail.sh,
 # vi mail.sh chi tu goi main() khi duoc thuc thi truc tiep
 
