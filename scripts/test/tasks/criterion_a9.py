@@ -83,13 +83,13 @@ def task_A09_02(task: Task) -> Result:
     try:
         cmd_result = run_command(task=task, command=command)
         command_outputs.append(cmd_result.result)
-        mail_body = cmd_result.result
-        mail_body = mail_body.lower()
-        if (
-            "to: jamie.oliver@dmz.pvnskills.org"
-            and "from: echo@dmz.pvnskills.org"
-            and "report-type=delivery-status"
-        ):
+        mail_body = (cmd_result.result or "").lower()
+        expected_fragments = [
+            "to: jamie.oliver@dmz.pvnskills.org",
+            "from: echo@dmz.pvnskills.org",
+            "report-type=delivery-status",
+        ]
+        if all(fragment in mail_body for fragment in expected_fragments):
             score = 1.5
             msg = "Echo mail has been received"
     except Exception:

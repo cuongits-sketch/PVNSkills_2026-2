@@ -52,7 +52,7 @@ def task_A15_02(task: Task) -> Result:
             score += 0.25
     except Exception:
         command_outputs.append(UNKNOWN_MSG)
-    
+
     command = "curl -s --connect-timeout 2 http://127.0.0.1/whoami 2>&1"
     commands.append(command)
     try:
@@ -62,6 +62,11 @@ def task_A15_02(task: Task) -> Result:
             score += 0.25
     except Exception:
         command_outputs.append(UNKNOWN_MSG)
+
+    if score == 0.75:
+        msg = f"Ansible manages {task.host.name} and the served pages match the expected behavior"
+    elif score > 0:
+        msg = "Some Ansible-managed web checks passed, but not all expected outputs were returned"
 
     return Result(
         host=task.host,

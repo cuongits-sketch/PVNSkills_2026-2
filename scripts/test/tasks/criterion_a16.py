@@ -14,12 +14,14 @@ def task_A16_01(task: Task) -> Result:
     commands = [command, second_command]
     command_outputs = []
     msg = "udp/53 and tcp/53 are NOT reachable over WAN"
+    udp_ok = False
     try:
         cmd_result = run_command(task=task, command=command)
         command_outputs.append(cmd_result.result)
         if "dmz.pvnskills.org" in cmd_result.result:
             msg = "udp/53 is reachable over WAN"
             score += 0.05
+            udp_ok = True
     except Exception:
         command_outputs.append(UNKNOWN_MSG)
 
@@ -29,7 +31,7 @@ def task_A16_01(task: Task) -> Result:
         if "dmz.pvnskills.org" in cmd_result.result:
             msg = (
                 "udp/53 & tcp/53 are reachable over WAN"
-                if score == 1
+                if udp_ok
                 else "tcp/53 are reachable over WAN"
             )
             score += 0.05

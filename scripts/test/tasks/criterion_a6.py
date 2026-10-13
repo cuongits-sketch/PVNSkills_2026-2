@@ -31,7 +31,7 @@ def task_A06_01(
     if cheated:
         return Result(
             host=task.host,
-            msg="SNAT is probably not working on fw01 as default route exists on jamie-ws01",
+            result="SNAT is probably not working on fw01 as default route exists on jamie-ws01",
             command_run=check_command,
             command_output=check_command_output,
             score=0,
